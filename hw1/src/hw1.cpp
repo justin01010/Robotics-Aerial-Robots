@@ -51,19 +51,23 @@ void KeyboardControl()
     switch (c)
     {
       // finish your code here
-
+	  case 87:
       case 119:    // key w
         vel_msg.linear.x +=0.5;
         break;
+	  case 83:
       case 115:    // key s
         vel_msg.linear.x -=0.5;
         break;
+	  case 68:
       case 100:    // key d
         vel_msg.angular.z -=0.1;
         break;
+	  case 65:
       case 97:    // key a
         vel_msg.angular.z +=0.1;
         break;
+	  case 82:
       case 114:    // key r, stop the turtle 
         vel_msg.linear.x = 0;
 		vel_msg.angular.z = 0;
