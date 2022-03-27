@@ -1,5 +1,5 @@
 import time
-from math import cos, sin, acos
+from math import cos, sin, acos, sqrt
 import numpy as np
 from Quadrotor import Quadrotor
 from mpl_toolkits.mplot3d import Axes3D
@@ -84,6 +84,8 @@ def quad_sim():
     des_R = .....
     
     '''
+    des_R = np.eye(3)
+
     while True:
         
         while t <= T:
@@ -93,24 +95,24 @@ def quad_sim():
             des_z_vel = np.array([0])
             des_z_acc = np.array([0])
             
-            ''' Homework3
             
             # get rel_R (rotation matrix from current orientation to desired orientation)
             
-            rel_R = ....
+            rel_R = np.transpose(des_R) * q.R
             
             # get the rotation axis , you can see this as eigen vector (with eigen value = 1)
             
-            axis = .....
+            axis = 1/2 * vee_map(rel_R - np.linalg.inv(rel_R))
 
             # get the rotation angle of the rotation axis
-            angle_of_axis = .....
+            angle_of_axis = acos((trace(rel_R)-1)/2)
             
+            print(axis)
             # get the rotation error 
-            rotation_error = .....
+            #rotation_error = np.linalg.norm(angle_of_axis)
+            rotation_error = angle_of_axis*axis # / sqrt(pow(axis[0],2)+pow(axis[1],2)+pow(axis[2],2)) 
             
-                        
-            '''
+            print(rotation_error)            
             
             desire_w = np.array([des_roll_rate,des_pitch_rate,des_yaw_rate]).reshape(3,1)
             ew = angular_vel - (q.R.T @ des_R) @ desire_w
