@@ -1,0 +1,11 @@
+data = xlsread('HW4-1.xls');
+A = [data(:,1:2)];
+Y = [data(:,3)];
+x = inv(A'*A)*A'*Y;
+% disp(x)
+% y = A*x
+fprintf('The linear reg
+first = A*x;
+disp([first,Y])
+
+
